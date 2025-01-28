@@ -31,6 +31,7 @@ function reducer(state, action) {
     case "dataReceived":
       return { ...state, questions: action.payload, status: "ready" };
     case "dataFailed":
+      console.log(action.payload);
       return {
         ...state,
         status: "error",
@@ -88,10 +89,10 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch("https://react-quiz-rvm8.onrender.com/questions")
+    fetch("https://react-quiz-server-frqt.onrender.com/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
+      .catch((err) => dispatch({ type: "dataFailed", payload: err }));
   }, []);
 
   return (
