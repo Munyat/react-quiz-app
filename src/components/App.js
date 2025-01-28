@@ -89,9 +89,11 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch("https://react-quiz-server-frqt.onrender.com/questions")
+    fetch("https://api.jsonbin.io/v3/b/6798b76aacd3cb34a8d4392c")
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
+      .then((data) =>
+        dispatch({ type: "dataReceived", payload: data.record.questions })
+      )
       .catch((err) => dispatch({ type: "dataFailed", payload: err }));
   }, []);
 
